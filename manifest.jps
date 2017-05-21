@@ -1,0 +1,20 @@
+{
+    "jpsType": "install",
+    "jpsVersion": "0.99",
+    "id": "node-red-dev",
+    "name": "Node-RED Dev",
+    "logo": "https://nodered.jp/node-red.png",
+    "description": "Your dedicated Node-RED development environment in the cloud.",
+    "ssl": true,
+    "nodes": [{
+        "cloudlets": 16,
+        "displayName": "Node-RED",
+        "image": "nodered/node-red-docker",
+        "env": {
+            "JELASTIC_EXPOSE": "1880"
+        }
+    }],
+    "success": {
+        "text": "Done! Press 'Open in Browser' button."
+    }
+}
