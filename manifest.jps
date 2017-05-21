@@ -10,6 +10,7 @@
         "cloudlets": 16,
         "displayName": "Node-RED",
         "image": "nodered/node-red-docker",
+        "nodeGroup": "cp",        
         "env": {
             "JELASTIC_EXPOSE": "1880"
         }
