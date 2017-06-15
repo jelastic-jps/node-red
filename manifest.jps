@@ -5,12 +5,13 @@
     "name": "Node-RED Dev",
     "logo": "https://nodered.jp/node-red.png",
     "description": "Your dedicated Node-RED development environment in the cloud.",
-    "ssl": true,
+    "ssl": false,
     "nodes": [{
         "cloudlets": 16,
         "displayName": "Node-RED",
         "image": "nodered/node-red-docker",
         "nodeGroup": "cp",        
+        "extip": true,
         "env": {
             "JELASTIC_EXPOSE": "1880"
         }
