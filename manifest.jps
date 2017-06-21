@@ -5,6 +5,7 @@
     "name": "Node-RED Dev",
     "logo": "https://nodered.jp/node-red.png",
     "description": "Your dedicated Node-RED development environment in the cloud.",
+    "baseUrl": "https://raw.githubusercontent.com/jelastic-jps/node-red/master/",
     "nodes": [{
         "cloudlets": 16,
         "displayName": "Node-RED",
@@ -19,7 +20,7 @@
         "redirPort": 7654
     },
     "onInstall": [{
-        "script": "https://raw.githubusercontent.com/jelastic-jps/node-red/master/scripts/add-redirect.js",
+        "script": "${baseUrl}/scripts/add-redirect.js",
         "params": {
             "nodeId": "${nodes.cp.first.id}",
             "wsPort": "${globals.wsPort}",
@@ -28,7 +29,10 @@
     }, {
         "cmd[cp]": [
             "iptables -t nat -I PREROUTING -p tcp -m tcp --dport 80 -j REDIRECT --to-ports ${globals.redirPort}",
-            "iptables-save > /etc/iptables.rules"
+            "wget ${baseUrl}/scripts/iptables-load -O /etc/network/if-pre-up.d/iptables-load",
+            "wget ${baseUrl}/scripts/iptables-save -O /etc/network/if-post-down.d/iptables-save",
+            "chmod +x /etc/network/if-pre-up.d/iptables-load",
+            "chmod +x /etc/network/if-post-down.d/iptables-save"
         ]
     }, {
         "restartContainers": {
