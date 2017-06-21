@@ -5,15 +5,31 @@
     "name": "Node-RED Dev",
     "logo": "https://nodered.jp/node-red.png",
     "description": "Your dedicated Node-RED development environment in the cloud.",
-    "ssl": false,
     "nodes": [{
         "cloudlets": 16,
         "displayName": "Node-RED",
         "image": "nodered/node-red-docker",
-        "nodeGroup": "cp",        
-        "extip": true,
-        "env": {
-            "JELASTIC_EXPOSE": "1880"
+        "nodeGroup": "cp"
+    }],
+    "globals": {
+        "wsPort": 1880,
+        "redirPort": 7654
+    },
+    "onInstall": [{
+        "script": "https://raw.githubusercontent.com/jelastic-jps/node-red/master/scripts/add-redirect.js?2345",
+        "params": {
+            "nodeId": "${nodes.cp.first.id}",
+            "wsPort": "${globals.wsPort}",
+            "redirPort": "${globals.redirPort}"
+        }
+    }, {
+        "cmd[cp]": [
+            "iptables -t nat -I PREROUTING -p tcp -m tcp --dport 80 -j REDIRECT --to-ports ${globals.redirPort}",
+            "iptables-save > /etc/iptables.rules"
+        ]
+    }, {
+        "restartContainers": {
+            "nodeGroup": "cp"
         }
     }],
     "success": {
