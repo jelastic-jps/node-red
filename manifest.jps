@@ -9,14 +9,17 @@
         "cloudlets": 16,
         "displayName": "Node-RED",
         "image": "nodered/node-red-docker",
-        "nodeGroup": "cp"
+        "nodeGroup": "cp",
+        "env": {
+            "JELASTIC_EXPOSE": "FALSE"
+        }
     }],
     "globals": {
         "wsPort": 1880,
         "redirPort": 7654
     },
     "onInstall": [{
-        "script": "https://raw.githubusercontent.com/jelastic-jps/node-red/master/scripts/add-redirect.js?2345",
+        "script": "https://raw.githubusercontent.com/jelastic-jps/node-red/master/scripts/add-redirect.js",
         "params": {
             "nodeId": "${nodes.cp.first.id}",
             "wsPort": "${globals.wsPort}",
