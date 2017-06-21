@@ -1,13 +1,12 @@
 //@auth
-//@req(nodeId, port)
+//@req(nodeId, wsPort, redirPort)
 
 var envName = '${env.envName}';
 
-var resp = jelastic.env.control.AddEndpoint(envName, session, nodeId, port, "TCP", "Node-RED WS");
+var resp = jelastic.env.control.AddEndpoint(envName, session, nodeId, wsPort, "TCP", "Node-RED WS");
 if (resp.result != 0) return resp;
 
 var endPointPort = resp.object.publicPort;
-var redirPort = 7654; 
 var redirect = "require(\"http\").createServer(function (req, res) { res.writeHead(301, {\"Location\": \"http://\" + req.headers.host + \":" + endPointPort + "\" + req.url}); res.end(); }).listen(" + redirPort + ", \"0.0.0.0\");"
 
 path = "/usr/src/node-red/node_modules/node-red/red.js";
