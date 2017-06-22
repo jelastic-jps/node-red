@@ -44,6 +44,6 @@
         }
     }],
     "success": {
-        "text": "Start building your Node-RED IoT connectivity flows just now - click Open in Browser for the dedicated web-based editor launch.”
+        "text": "Start building your Node-RED IoT connectivity flows just now - click Open in Browser for the dedicated web-based editor launch."
     }
 }
