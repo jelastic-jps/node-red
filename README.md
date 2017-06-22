@@ -26,4 +26,4 @@ In the opened installation dialog box, type a name and, optionally, *Display Nam
 
 When deployment is completed, you’ll see the appropriate confirmation pop-up with the **Open in browser** option to launch Node-RED development dashboard. 
  
-![node-red-success-message](images/node-red-success-message.png)
+![nodered-success-message](images/nodered-success-message.png)
