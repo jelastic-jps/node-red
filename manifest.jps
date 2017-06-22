@@ -4,10 +4,10 @@
     "id": "node-red-dev",
     "name": "Node-RED Dev",
     "logo": "https://nodered.jp/node-red.png",
-    "description": { 
-        "text": "Node-RED development environment to wire services, devices and APIs into a single IoT network within a Cloud. Provides web-based editor with a wide range of nodes to connect and deploy flows.",
-        "short": "Node-RED development environment for building IoT networks in the Cloud."
-    },
+    "description": {
+		"text": "<div style=\"padding-left: 8px\">Node-RED development environment to wire services, devices and APIs into a single IoT network within a Cloud. Provides web-based editor with a wide range of nodes to connect and deploy flows.",
+		"short": "Node-RED development environment for building IoT networks in the Cloud."
+	},
     "baseUrl": "https://raw.githubusercontent.com/jelastic-jps/node-red/master/",
     "categories": ["apps/dev-and-admin-tools"],
     "nodes": [{
