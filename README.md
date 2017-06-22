@@ -1,4 +1,4 @@
-[node-red-logo](images/node-red-logo.png)
+![node-red-logo](images/node-red-logo.png)
  
 # Node-RED Development Environment  
  
@@ -20,11 +20,10 @@ In order to get Node-RED Development Environment instantly deployed, click the *
  
 To deploy the package manually, log in to Jelastic dashboard with your credentials and [import](https://docs.jelastic.com/environment-import) link to the **_manifest.jps_** file above.
  
-[node-red-installation](images/node-red-installation.png)
-
+![node-red-installation](images/node-red-installation.png)
 
 In the opened installation dialog box, type a name and, optionally, *Display Name* ([alias](https://docs.jelastic.com/environment-aliases))  for your *Environment*, select a _[Region](https://docs.jelastic.com/environment-regions)_ it will be placed at (if several ones are available) and click **Install**.
 
 When deployment is completed, you’ll see the appropriate confirmation pop-up with the **Open in browser** option to launch Node-RED development dashboard. 
  
-[node-red-success-message](images/node-red-success-message.png)
+![node-red-success-message](images/node-red-success-message.png)
