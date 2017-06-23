@@ -27,3 +27,5 @@ In the opened installation dialog box, type a name and, optionally, *Display Nam
 When deployment is completed, you’ll see the appropriate confirmation pop-up with the **Open in browser** option to launch Node-RED development dashboard. 
  
 ![nodered-success-message](images/nodered-success-message.png)
+
+To find more details on Node-RED Development Environment package installation and usage, refer to the appropriate detailed [guidance](http://blog.jelastic.com/2017/06/22/node-red-cloud-hosting-for-tweeter-feed-analysis/).
