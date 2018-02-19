@@ -11,7 +11,7 @@
     "baseUrl": "https://raw.githubusercontent.com/jelastic-jps/node-red/master/",
     "categories": ["apps/dev-and-admin-tools"],
     "nodes": [{
-        "cloudlets": 16,
+        "cloudlets": 8,
         "displayName": "Node-RED",
         "image": "nodered/node-red-docker",
         "nodeGroup": "cp",
