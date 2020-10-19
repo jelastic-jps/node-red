@@ -2,8 +2,7 @@ type: install
 version: 0.99
 id: node-red-dev
 name: Node-RED Dev
-logo: https://nodered.jp/node-red.png
-
+logo: images/node-red-logo.png
 description:
   text: Node-RED development environment to wire services, devices and APIs into a single IoT network within a Cloud. Provides web-based editor with a wide range of nodes to connect and deploy flows.
   short: Node-RED development environment for building IoT networks in the Cloud.
