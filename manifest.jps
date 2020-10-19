@@ -1,49 +1,45 @@
-{
-    "jpsType": "install",
-    "jpsVersion": "0.99",
-    "id": "node-red-dev",
-    "name": "Node-RED Dev",
-    "logo": "https://nodered.jp/node-red.png",
-    "description": {
-		"text": "<div style=\"padding-left: 8px\">Node-RED development environment to wire services, devices and APIs into a single IoT network within a Cloud. Provides web-based editor with a wide range of nodes to connect and deploy flows.",
-		"short": "Node-RED development environment for building IoT networks in the Cloud."
-	},
-    "baseUrl": "https://raw.githubusercontent.com/jelastic-jps/node-red/master/",
-    "categories": ["apps/dev-and-admin-tools"],
-    "nodes": [{
-        "cloudlets": 8,
-        "displayName": "Node-RED",
-        "image": "nodered/node-red-docker",
-        "nodeGroup": "cp",
-        "env": {
-            "JELASTIC_EXPOSE": "FALSE"
-        }
-    }],
-    "globals": {
-        "wsPort": 1880,
-        "redirPort": 7654
-    },
-    "onInstall": [{
-        "script": "${baseUrl}/scripts/add-redirect.js",
-        "params": {
-            "nodeId": "${nodes.cp.first.id}",
-            "wsPort": "${globals.wsPort}",
-            "redirPort": "${globals.redirPort}"
-        }
-    }, {
-        "cmd[cp]": [
-            "iptables -t nat -I PREROUTING -p tcp -m tcp --dport 80 -j REDIRECT --to-ports ${globals.redirPort}",
-            "wget ${baseUrl}/scripts/iptables-load -O /etc/network/if-pre-up.d/iptables-load",
-            "wget ${baseUrl}/scripts/iptables-save -O /etc/network/if-post-down.d/iptables-save",
-            "chmod +x /etc/network/if-pre-up.d/iptables-load",
-            "chmod +x /etc/network/if-post-down.d/iptables-save"
-        ]
-    }, {
-        "restartContainers": {
-            "nodeGroup": "cp"
-        }
-    }],
-    "success": {
-        "text": "Start building your Node-RED IoT connectivity flows just now - click Open in Browser for the dedicated web-based editor launch."
-    }
-}
+type: install
+version: 0.99
+id: node-red-dev
+name: Node-RED Dev
+logo: https://nodered.jp/node-red.png
+
+description:
+  text: Node-RED development environment to wire services, devices and APIs into a single IoT network within a Cloud. Provides web-based editor with a wide range of nodes to connect and deploy flows.
+  short: Node-RED development environment for building IoT networks in the Cloud.
+
+baseUrl: https://raw.githubusercontent.com/jelastic-jps/node-red/master/
+
+categories:
+- apps/dev-and-admin-tools
+
+nodes:
+- cloudlets: 8
+  displayName: Node-RED
+  image: nodered/node-red
+  nodeGroup: cp
+  env:
+    JELASTIC_EXPOSE: 'FALSE'
+globals:
+  wsPort: 1880
+  redirPort: 7654
+
+onInstall:
+- script: /scripts/add-redirect.js
+  params:
+    nodeId: ${nodes.cp.first.id}
+    wsPort: ${globals.wsPort}
+    redirPort: ${globals.redirPort}
+- cmd[cp]:
+  - iptables -t nat -I PREROUTING -p tcp -m tcp --dport 80 -j REDIRECT --to-ports
+    ${globals.redirPort}
+  - wget ${baseUrl}/scripts/iptables-load -O /etc/network/if-pre-up.d/iptables-load
+  - wget ${baseUrl}/scripts/iptables-save -O /etc/network/if-post-down.d/iptables-save
+  - chmod +x /etc/network/if-pre-up.d/iptables-load
+  - chmod +x /etc/network/if-post-down.d/iptables-save
+- restartContainers:
+    nodeGroup: cp
+
+success:
+  text: Start building your Node-RED IoT connectivity flows just now - click Open in Browser for the dedicated web-based editor launch.
+
