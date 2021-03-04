@@ -21,7 +21,7 @@ nodes:
     JELASTIC_EXPOSE: 'FALSE'
 globals:
   wsPort: 1880
-  redirPort: 7654
+  redirPort: 80
 
 onInstall:
 - script: /scripts/add-redirect.js
@@ -29,16 +29,8 @@ onInstall:
     nodeId: ${nodes.cp.first.id}
     wsPort: ${globals.wsPort}
     redirPort: ${globals.redirPort}
-- cmd[cp]:
-  - iptables -t nat -I PREROUTING -p tcp -m tcp --dport 80 -j REDIRECT --to-ports
-    ${globals.redirPort}
-  - wget ${baseUrl}/scripts/iptables-load -O /etc/network/if-pre-up.d/iptables-load
-  - wget ${baseUrl}/scripts/iptables-save -O /etc/network/if-post-down.d/iptables-save
-  - chmod +x /etc/network/if-pre-up.d/iptables-load
-  - chmod +x /etc/network/if-post-down.d/iptables-save
 - restartContainers:
     nodeGroup: cp
 
 success:
   text: Start building your Node-RED IoT connectivity flows just now - click Open in Browser for the dedicated web-based editor launch.
-
