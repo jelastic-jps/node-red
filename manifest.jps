@@ -12,6 +12,21 @@ baseUrl: https://raw.githubusercontent.com/jelastic-jps/node-red/master/
 categories:
 - apps/dev-and-admin-tools
 
+onBeforeInit: |
+  var settings = jps.settings || {fields: []};
+  var fields = settings.fields;
+  var quotas = jelastic.billing.account.GetQuotas('environment.endpoint.enabled').array;
+  for (var i = 0; i < quotas.length; i++){
+    var q = quotas[i], n = toNative(q.quota.name);
+    if (n == 'environment.endpoint.enabled' && !q.value) {
+      fields.push(
+        {"type": "compositefield","height": 0,"hideLabel": true,"width": 0,"items": [{"height": 0,"type": "string","required": true}]},
+        {"type": "displayfield","cls": "warning","height": 30,"hideLabel": true,"hidden": false,"markup": "Endpoint is disabled. Please upgrade your account."}
+      );
+    };
+  }
+  return { result: 0, settings: settings };
+
 nodes:
 - cloudlets: 8
   displayName: Node-RED
