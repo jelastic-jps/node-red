@@ -12,7 +12,8 @@ baseUrl: https://raw.githubusercontent.com/jelastic-jps/node-red/master/
 categories:
 - apps/dev-and-admin-tools
 
-onBeforeInit: scripts/onBeforeInit.js
+skipNodeEmails: true
+ssl: true
 
 nodes:
 - cloudlets: 8
@@ -20,24 +21,9 @@ nodes:
   image: nodered/node-red
   nodeGroup: cp
   env:
-    JELASTIC_EXPOSE: '7654'
-globals:
-  wsPort: 1880
-  redirPort: 7654
-
-onInstall:
-- script: /scripts/add-redirect.js
-  params:
-    nodeId: ${nodes.cp.first.id}
-    wsPort: ${globals.wsPort}
-    redirPort: ${globals.redirPort}
-- cmd[cp]:
-  - wget ${baseUrl}/scripts/iptables-load -O /etc/network/if-pre-up.d/iptables-load
-  - wget ${baseUrl}/scripts/iptables-save -O /etc/network/if-post-down.d/iptables-save
-  - chmod +x /etc/network/if-pre-up.d/iptables-load
-  - chmod +x /etc/network/if-post-down.d/iptables-save
-- restartContainers:
-    nodeGroup: cp
+    JELASTIC_EXPOSE: '1880'
+  volumes:
+    - /data
 
 success:
   text: Start building your Node-RED IoT connectivity flows just now - click Open in Browser for the dedicated web-based editor launch.
